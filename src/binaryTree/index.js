@@ -1,4 +1,5 @@
 import Tree from '../base/tree';
+import TreeNode from "../base/treeNode";
 
 export class BinaryTree extends Tree {
   constructor() {
@@ -6,6 +7,15 @@ export class BinaryTree extends Tree {
     this.depth = -1;
     this.nodes = [];
     this.deepestNodeSum = 0;
+  }
+
+  insert(ele) {
+    if(this.root === null) {
+      this.root = new TreeNode(ele);
+    } else {
+      const newNode = new TreeNode(ele);
+      _insertNode(this.root, newNode);
+    }
   }
 
   /**
@@ -126,4 +136,21 @@ function _deepestLeaves(node) {
   let leftDepth = _deepestLeaves(node.left) + 1;
   let rightDepth = _deepestLeaves(node.right) + 1;
   return Math.max(leftDepth, rightDepth);
+}
+
+// 递归构建二叉树
+function _insertNode(oldNode, newNode) {
+  if(newNode.value >= oldNode.value) {
+    if(oldNode.right === null) {
+      oldNode.right = newNode;
+    } else {
+      _insertNode(oldNode.right, newNode);
+    }
+  } else {
+    if(oldNode.left === null) {
+      oldNode.left = newNode;
+    } else {
+      _insertNode(oldNode.left, newNode);
+    }
+  }
 }

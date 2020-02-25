@@ -1,5 +1,5 @@
 
-export default class Node {
+export default class TreeNode {
   /**
    * @param ele {Object|Number}
    * @param left {Object}
@@ -14,4 +14,4 @@ export default class Node {
   }
 }
 
-export { Node };
+export { TreeNode };
