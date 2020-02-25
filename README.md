@@ -14,25 +14,106 @@ Browser
 ```html
 <script src="url/i-class/dist/i-class.umd.js"></script>
 <script>
-  var Node = iClass.Node;
+  var TreeNode = iClass.TreeNode;
 </script>
 ```
 
 Es6
 
 ```js
-import { Node } from '@idogo/i-class';
-const node = new Node(10);
+import { TreeNode } from '@idogo/i-class';
+const node = new TreeNode(10);
 ```
 
-Node
+TreeNode
 
 ```js
-const Node = require('@idogo/i-class').Node;
-const node = new Node(10);
+const TreeNode = require('@idogo/i-class').TreeNode;
+const node = new TreeNode(10);
 ```
 
 ## Interface class
+
+ 
+### TreeNode
+> construct tree node
+
+Constructor instance:
+
+```js
+import { TreeNode } from '@idogo/i-class';
+const node = new TreeNode(10);
+```
+
+Constructor by object element which has required key `value` and optional key `payLoad`:
+```js
+const ele = { value: 90 }; 
+const node = new TreeNode(ele);
+```
+```js
+const ele = { value: 90, payLoad: 'I am old man' }; 
+const node = new TreeNode(ele);
+```
+
+Constructor chained instances:
+```js
+const root = new TreeNode(19);
+root.left = new TreeNode(20);
+root.right = new TreeNode(22);
+```
+```js
+const root = new TreeNode(19, new TreeNode(29), new TreeNode(22));
+```
+
+Other api:
+ - `left` default:null
+ - `right`default:null
+ - `payLoad`default:undefined
+ 
+ 
+### Heap
+
+Constructor instance:
+
+```js
+import { Heap } from '@idogo/i-class';
+const heap = new Heap({
+  data: [67, 78, 23, 56, 12, 2]
+});
+```
+
+Constructor a min(default) or max heap with `type` in config:
+
+```js
+const heap = new Heap({
+  data: [67, 78, 23, 56, 12, 2],
+  type: 'max'
+});
+```
+
+Shift top element:
+
+```js
+const heap = new Heap({
+  data: [67, 78, 23, 56, 12, 2],
+  type: 'max'
+});
+heap.shift(); // 78
+heap.size(); // 5
+```
+
+
+Append an element:
+```js
+import { Heap } from '@idogo/i-class';
+const heap = new Heap({
+  data: [67, 78, 23, 56, 12, 2]
+});
+heap.append(88); // [88, 67, 78, 56, 12, 2, 23]
+heap.append(6); // [88, 67, 78, 56, 12, 2, 23, 6]
+heap.size(); // 8
+```
+
 
 ### BinaryTree
 
@@ -78,42 +159,6 @@ Other api:
  - `deepestLeaves` return depth of BinaryTree instance.
  - `nodesOfLevels` return nodes of levels by Array.(eg: [[5], [6, 7], [12, 5, 7]])
  - `deepestLeavesSum` return sum of deepest nodes.
- 
- 
-### Node
-> construct tree node
-
-Constructor instance:
-
-```js
-import { Node } from '@idogo/i-class';
-const node = new Node(10);
-```
-
-Constructor by object element which has required key `value` and optional key `payLoad`:
-```js
-const ele = { value: 90 }; 
-const node = new Node(ele);
-```
-```js
-const ele = { value: 90, payLoad: 'I am old man' }; 
-const node = new Node(ele);
-```
-
-Constructor chained instances:
-```js
-const root = new Node(19);
-root.left = new Node(20);
-root.right = new Node(22);
-```
-```js
-const root = new Node(19, new Node(29), new Node(22));
-```
-
-Other api:
- - `left` default:null
- - `right`default:null
- - `payLoad`default:undefined
 
 ## License
 

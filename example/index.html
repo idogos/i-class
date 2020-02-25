@@ -7,15 +7,24 @@
 <body>
 <script src="../dist/i-class.umd.js"></script>
 <script>
+  /* 二叉树 */
   const BinaryTree = iClass.BinaryTree;
-  // const nums = [67, 78, 23, 56, 12, 2];
   const nums = [{ value: 67 }, { value: 78 }, { value: 22 }, { value: 56 }, { value: 12 }, { value: 2 }];
   const bt = new BinaryTree();
-  // console.log(bt.constructTree(nums));
-  console.log(bt.constructMaxTree(nums));
-  console.log(bt.deepestLeaves());
-  console.log(bt.nodesOfLevels());
-  console.log(bt.deepestLeavesSum());
+  // console.log(bt.constructMaxTree(nums));
+  // console.log(bt.deepestLeaves());
+  // console.log(bt.nodesOfLevels());
+  // console.log(bt.deepestLeavesSum());
+
+  /* 堆 */
+  const Heap = iClass.Heap;
+  const nums2 = [67, 78, 23, 56, 12, 2];
+  const heap = new Heap({
+    data: nums2,
+    type: 'max'
+  });
+  // heap.append(88);
+
 </script>
 </body>
 </html>
