@@ -1,16 +1,20 @@
+import { isObject } from "../libs/util";
 
-export default class TreeNode {
-  /**
-   * @param ele {Object|Number}
-   * @param left {Object}
-   * @param right {Object}
-   * @param payLoad {*}
-   */
-  constructor(ele = undefined, left = null, right = null, payLoad = null) {
-    this.value = typeof ele === 'object' ? ele.value : ele;
+interface Value {
+  value: string | number | null | undefined
+}
+
+class TreeNode {
+  value: string | number | null | undefined;
+  left: TreeNode;
+  right: TreeNode;
+  payLoad?: any;
+
+  constructor(ele: Value | any, left?, right?, payLoad?) {
+    this.value = isObject(ele) ? ele.value : ele;
     this.left = left;
     this.right = right;
-    this.payLoad = payLoad || (ele && ele.payLoad);
+    this.payLoad = payLoad;
   }
 }
 
