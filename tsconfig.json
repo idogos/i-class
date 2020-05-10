@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "declaration": true
+  },
+  "exclude": [
+    "node_modules",
+    "example",
+    "dist",
+    "test"
+  ],
+  "include": [
+    "src"
+  ]
+}
