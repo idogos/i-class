@@ -10,7 +10,7 @@ class TreeNode {
   right: TreeNode;
   payLoad?: any;
 
-  constructor(ele: Value | any, left?, right?, payLoad?) {
+  constructor(ele: Value | any, left = null, right = null, payLoad?) {
     this.value = isObject(ele) ? ele.value : ele;
     this.left = left;
     this.right = right;

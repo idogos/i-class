@@ -1,20 +1,21 @@
-/// <reference path="./HeapAbout.ts" />
-type Data = {
-  value: number
-}
+import { HeapAbout } from "./HeapAbout";
+import { HeapNode } from "../base/heapNode";
+import { isObject } from "../libs/util";
 
 interface Props {
-  data: Array<Data> | Array<number>,
+  data: Array<HeapNode> | Array<number>,
   type: string
 }
 
 export class Heap {
   data: any[];
   type: string;
+  isObjectElement: boolean;
 
   constructor(config: Props) {
     const {data = [], type = HeapAbout.MIN_TYPE} = config;
-    this.data = this.getProxyData(data);
+    this.isObjectElement = false;
+    this.data = this.transformHeapNode(data);
     this.type = type;
     this.createHeap();
   }
@@ -25,13 +26,13 @@ export class Heap {
     const type = this.type;
     let next = start * 2 + 1;
     let temp = data[start];
-    while (next < length) {
+    while (next < length - 1) {
       if (type === HeapAbout.MIN_TYPE) {
-        if (data[next] > data[next + 1]) next++; // 构建最小堆
-        if (temp < data[next]) break; // 构建最小堆
+        if (data[next].value > data[next + 1].value) next++; // 构建最小堆
+        if (temp.value < data[next].value) break; // 构建最小堆
       } else {
-        if (data[next] < data[next + 1]) next++; // 构建最大堆
-        if (temp > data[next]) break; // 构建最大堆
+        if (data[next].value < data[next + 1].value) next++; // 构建最大堆
+        if (temp.value > data[next].value) break; // 构建最大堆
       }
       const parent = Math.floor((next - 1) / 2);
       data[parent] = data[next];
@@ -44,7 +45,7 @@ export class Heap {
     const data = this.data;
     const type = this.type;
     const temp = data[last];
-    while (last > 0 && (type === HeapAbout.MIN_TYPE ? temp < data[Math.floor((last - 1) / 2)] : temp > data[Math.floor((last - 1) / 2)])) {
+    while (last > 0 && (type === HeapAbout.MIN_TYPE ? temp.value < data[Math.floor((last - 1) / 2)].value : temp.value > data[Math.floor((last - 1) / 2)].value)) {
       data[last] = data[Math.floor((last - 1) / 2)];
       last = Math.floor((last - 1) / 2);
     }
@@ -55,24 +56,20 @@ export class Heap {
     return this.data.length;
   }
 
-  getProxyData(data) {
-    let proxyInstance;
-    if(isDataType(data)) {
-      proxyInstance = new Proxy(data, {
-        get: function (target, key) {
-          if (key.constructor.name !== 'Symbol') {
-            if (key in target) {
-              if (target.hasOwnProperty(Number(key))) {
-                return target[key].value || null;
-              }
-              return target[key];
-            }
-          }
-        }
-      });
-      return proxyInstance;
+  export() {
+    const data = this.data;
+    return this.isObjectElement ? data : data.map(ele => ele.value);
+  }
+
+  transformHeapNode(data) {
+    let result;
+    if(isHeapNodeList(data)) {
+      return data;
+    } else {
+      this.isObjectElement = typeof data[0] === 'object';
+      result = data.map(ele => new HeapNode(ele, ele.payLoad));
     }
-    return data;
+    return result;
   }
 
   createHeap() {
@@ -94,14 +91,20 @@ export class Heap {
   }
 
   append(element) {
-    this.data.push(element);
+    this.data.push(isHeapNode(element) ? element : new HeapNode(element, element.payLoad));
     this._adjustUp(this.size() - 1);
     return this.data;
   }
 
 }
 
-// 判断Heap的data是否为Array<Data>
-function isDataType(arg) {
-  return (arg as Array<Data>)[0].value !== undefined;
+// 判断Heap的data是否为Array<HeapNode>
+function isHeapNodeList(arg) {
+  const ins = arg as Array<HeapNode>;
+  return ins[0].constructor && ins[0].constructor.name === 'HeapNode';
+}
+
+// 判断是否为Heap节点
+function isHeapNode(element) {
+  return element.constructor && element.constructor.name === 'HeapNode';
 }
