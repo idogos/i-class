@@ -4,6 +4,7 @@
   "main": "dist/i-class.cjs.js",
   "module": "dist/i-class.esm.js",
   "browser": "dist/i-class.umd.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
     "@babel/runtime": "^7.8.4",
     "ms": "^2.0.0"
@@ -25,7 +26,7 @@
     "dev": "rollup -c -w",
     "test": "node test/test.js",
     "pretest": "npm run build",
-    "typing": "cp -r ./dist/index.d.ts `find ./dist/* !-name ./dist/i-class.*.js -type d` ./typings"
+    "typing": "rollup -c && cp -r ./dist/index.d.ts `find ./dist/* !-name ./dist/i-class.*.js -type d` ./typings"
   },
   "files": [
     "dist"
