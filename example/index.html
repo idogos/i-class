@@ -11,10 +11,12 @@
   const BinaryTree = iClass.BinaryTree;
   const nums = [{ value: 67 }, { value: 78 }, { value: 22 }, { value: 56 }, { value: 12 }, { value: 2 }];
   const bt = new BinaryTree();
-  // console.log(bt.constructMaxTree(nums));
-  // console.log(bt.deepestLeaves());
-  // console.log(bt.nodesOfLevels());
-  // console.log(bt.deepestLeavesSum());
+  console.log(bt.constructTree(nums));
+  const btMax = new BinaryTree();
+  console.log(btMax.constructMaxTree(nums));
+  console.log(bt.deepestLeaves());
+  console.log(bt.nodesOfLevels());
+  console.log(bt.deepestLeavesSum());
 
   /* 堆 */
   const Heap = iClass.Heap;
@@ -23,8 +25,32 @@
     data: nums2,
     type: 'max'
   });
-  // heap.append(88);
+  console.log(heap.export());
+  heap.append(199);
+  console.log(heap.export());
+  console.log('################################################');
+  const nums3 = [{
+    value: 39,
+    payLoad: 'Leo'
+  }, {
+    value: 32,
+    payLoad: 'John'
+  }, {
+    value: 90,
+    payLoad: 'Rose'
+  }];
 
+  const heap2 = new Heap({
+    data: nums3,
+    type: 'max'
+  });
+  console.log(heap2.data);
+  heap2.append(99);
+  heap2.append(199);
+  heap2.append(9);
+  console.log(heap2.export());
+  heap2.shift();
+  console.log(heap2.export());
 </script>
 </body>
 </html>

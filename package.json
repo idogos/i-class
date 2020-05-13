@@ -4,6 +4,7 @@
   "main": "dist/i-class.cjs.js",
   "module": "dist/i-class.esm.js",
   "browser": "dist/i-class.umd.js",
+  "types": "dist/index.d.ts",
   "dependencies": {
     "@babel/runtime": "^7.8.4",
     "ms": "^2.0.0"
@@ -16,13 +17,16 @@
     "@rollup/plugin-commonjs": "^11.0.1",
     "@rollup/plugin-node-resolve": "^7.0.0",
     "rollup": "^1.29.0",
-    "rollup-plugin-babel": "^4.3.3"
+    "rollup-plugin-babel": "^4.3.3",
+    "rollup-plugin-typescript2": "^0.27.0",
+    "typescript": "^3.8.3"
   },
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "test": "node test/test.js",
-    "pretest": "npm run build"
+    "pretest": "npm run build",
+    "typing": "rollup -c && cp -r ./dist/index.d.ts `find ./dist/* !-name ./dist/i-class.*.js -type d` ./typings"
   },
   "files": [
     "dist"

@@ -1,6 +1,8 @@
-import TreeNode from './treeNode';
+import { TreeNode } from './treeNode';
 
-export default class Tree {
+class Tree {
+  root: TreeNode;
+
   constructor() {
     this.root = null;
   }
@@ -11,3 +13,5 @@ export default class Tree {
     return new Constructor();
   }
 }
+
+export { Tree };

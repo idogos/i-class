@@ -1,16 +1,19 @@
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
+import rollupTypescript from 'rollup-plugin-typescript2'
 import babel from 'rollup-plugin-babel';
+import { DEFAULT_EXTENSIONS } from '@babel/core'
 import pkg from './package.json';
 
 const plugins = [
-  resolve()
+  resolve(),
+  rollupTypescript()
 ];
 
 export default [
   // browser-friendly UMD build
   {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     output: {
       name: 'iClass',
       file: pkg.browser,
@@ -20,7 +23,11 @@ export default [
       ...plugins,
       commonjs(), // so Rollup can convert `ms` to an ES module
       babel({
-        exclude: 'node_modules/**'
+        exclude: 'node_modules/**',
+        extensions: [
+          ...DEFAULT_EXTENSIONS,
+          '.ts',
+        ],
       })
     ]
   },
@@ -32,7 +39,7 @@ export default [
   // an array for the `output` option, where we can specify
   // `file` and `format` for each target)
   {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     external: ['ms'],
     output: [
       { file: pkg.main, format: 'cjs' }
@@ -40,12 +47,16 @@ export default [
     plugins: [
       ...plugins,
       babel({
-        exclude: 'node_modules/**'
+        exclude: 'node_modules/**',
+        extensions: [
+          ...DEFAULT_EXTENSIONS,
+          '.ts',
+        ],
       })
     ]
   },
   {
-    input: 'src/index.js',
+    input: 'src/index.ts',
     external: ['ms'],
     output: [
       { file: pkg.module, format: 'es' }
