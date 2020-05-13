@@ -1,19 +1,18 @@
-/// <reference path="HeapAbout.d.ts" />
-declare type Data = {
-    value: number;
-};
+import { HeapNode } from "../base/heapNode";
 interface Props {
-    data: Array<Data> | Array<number>;
+    data: Array<HeapNode> | Array<number>;
     type: string;
 }
 export declare class Heap {
     data: any[];
     type: string;
+    isObjectElement: boolean;
     constructor(config: Props);
     _adjustDown(start: any, length: any): void;
     _adjustUp(last: any): void;
     size(): number;
-    getProxyData(data: any): any;
+    export(): any[];
+    transformHeapNode(data: any): any;
     createHeap(): any[];
     shift(): any;
     append(element: any): any[];
