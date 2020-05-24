@@ -1,6 +1,5 @@
 import { HeapAbout } from "./HeapAbout";
 import { HeapNode } from "../base/heapNode";
-import { isObject } from "../libs/util";
 
 interface Props {
   data: Array<HeapNode> | Array<number>,
