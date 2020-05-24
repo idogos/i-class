@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 const Mocha = require("mocha");
-const { lookupFilesHandler } = require("./helper");
+const { lookupFilesHandler, cover } = require("./helper");
 const options = require("./__base/conf");
 
 const { spec } = options;
@@ -23,6 +23,7 @@ async function run() {
     .forEach(specFile => {
       mocha.addFile(specFile);
     });
+  mocha.reporter(cover);
   await mocha.loadFilesAsync();
   return mocha.run();
 }

@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
-    "declaration": true
+    "declaration": true,
+    "declarationDir": "./types",
+    "target": "es5",
+    "module": "ESNext"
   },
   "exclude": [
     "node_modules",
