@@ -2,13 +2,21 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import rollupTypescript from 'rollup-plugin-typescript2'
 import babel from 'rollup-plugin-babel';
-import { DEFAULT_EXTENSIONS } from '@babel/core'
+import istanbul from 'rollup-plugin-istanbul';
+import { DEFAULT_EXTENSIONS } from '@babel/core';
 import pkg from './package.json';
 
 const plugins = [
   resolve(),
   rollupTypescript()
 ];
+
+console.log('process.env.BUILD ', process.env.BUILD);
+if (process.env.BUILD !== 'production') {
+  plugins.push(istanbul({
+    exclude: ['test/**/*', 'node_modules/**/*']
+  }));
+}
 
 export default [
   // browser-friendly UMD build
