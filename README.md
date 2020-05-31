@@ -1,6 +1,11 @@
 
 # i-class
 [![Build Status](https://travis-ci.org/idogos/i-class.svg?branch=master)](https://travis-ci.org/idogos/i-class)
+[![codecov](https://codecov.io/gh/idogos/i-class/branch/master/graph/badge.svg)](https://codecov.io/gh/idogos/i-class)
+![npm](https://img.shields.io/npm/v/@idogo/i-class)
+
+
+
 
 Usually data structure constructor class.
 
