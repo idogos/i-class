@@ -25,12 +25,12 @@ export class Heap {
     const type = this.type;
     let next = start * 2 + 1;
     let temp = data[start];
-    while (next < length - 1) {
+    while (next < length) {
       if (type === HeapAbout.MIN_TYPE) {
-        if (data[next].value > data[next + 1].value) next++; // 构建最小堆
+        if (data[next + 1] && data[next].value > data[next + 1].value) next++; // 构建最小堆
         if (temp.value < data[next].value) break; // 构建最小堆
       } else {
-        if (data[next].value < data[next + 1].value) next++; // 构建最大堆
+        if (data[next + 1] && data[next].value < data[next + 1].value) next++; // 构建最大堆
         if (temp.value > data[next].value) break; // 构建最大堆
       }
       const parent = Math.floor((next - 1) / 2);
@@ -62,7 +62,7 @@ export class Heap {
 
   transformHeapNode(data) {
     let result;
-    if(isHeapNodeList(data)) {
+    if (isHeapNodeList(data)) {
       return data;
     } else {
       this.isObjectElement = typeof data[0] === 'object';
