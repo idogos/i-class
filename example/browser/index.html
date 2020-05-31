@@ -5,13 +5,13 @@
     <title>i-class</title>
 </head>
 <body>
-<script src="../dist/i-class.umd.js"></script>
+<script src="../../dist/i-class.umd.js"></script>
 <script>
   /* 二叉树 */
   const BinaryTree = iClass.BinaryTree;
   const nums = [{ value: 67 }, { value: 78 }, { value: 22 }, { value: 56 }, { value: 12 }, { value: 2 }];
   const bt = new BinaryTree();
-  console.log(bt.constructTree(nums));
+  console.log(JSON.stringify(bt.constructTree(nums)));
   const btMax = new BinaryTree();
   console.log(btMax.constructMaxTree(nums));
   console.log(bt.deepestLeaves());
@@ -39,18 +39,20 @@
     value: 90,
     payLoad: 'Rose'
   }];
+  const nums4 = [67, 78, 22, 56, 12, 2];
 
   const heap2 = new Heap({
-    data: nums3,
+    data: nums4,
     type: 'max'
   });
-  console.log(heap2.data);
-  heap2.append(99);
-  heap2.append(199);
-  heap2.append(9);
   console.log(heap2.export());
-  heap2.shift();
-  console.log(heap2.export());
+  console.log(JSON.stringify(heap2.export()));
+  // heap2.append(99);
+  // heap2.append(199);
+  // heap2.append(9);
+  // console.log(heap2.export());
+  // heap2.shift();
+  // console.log(heap2.export());
 </script>
 </body>
 </html>
