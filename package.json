@@ -1,6 +1,6 @@
 {
   "name": "@idogo/i-class",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "dist/i-class.cjs.js",
   "module": "dist/i-class.esm.js",
   "browser": "dist/i-class.umd.js",
