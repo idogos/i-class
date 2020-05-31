@@ -1,6 +1,23 @@
-language: node_js
 node_js:
+  - '13'
+  - '12'
   - '11'
   - '10'
-  - '8'
-  - '6'
+
+env:
+  matrix:
+  - TEST_TYPE=build
+  - TEST_TYPE=compile
+  - TEST_TYPE=test
+
+install:
+- npm install
+- npm install -g codecov
+
+script:
+- npm test
+- codecov
+
+branches:
+  only:
+  - master
