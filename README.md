@@ -1,4 +1,7 @@
+
 # i-class
+[![Build Status](https://travis-ci.org/idogos/i-class.svg?branch=master)](https://travis-ci.org/idogos/i-class)
+
 Usually data structure constructor class.
 
 
